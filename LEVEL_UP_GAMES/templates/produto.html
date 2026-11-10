@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}{{ produto.nome }} | LEVEL UP GAMES{% endblock %}{% block content %}
+<div class="detail-layout"><div class="detail-image">{% if produto.imagem %}<img src="{{ produto.imagem }}" alt="{{ produto.nome }}">{% else %}<div class="image-placeholder">LEVEL UP</div>{% endif %}</div>
+<div class="detail-info"><span class="eyebrow">{{ produto.categoria or 'GAMES E ACESSÓRIOS' }}</span><h1>{{ produto.nome }}</h1><p>{{ produto.descricao }}</p><div class="detail-meta"><span>Plataforma: <b>{{ produto.plataforma }}</b></span><span>Estoque: <b>{{ produto.estoque }}</b></span></div><div class="detail-price">R$ {{ '%.2f'|format(produto.preco)|replace('.',',') }}</div>
+{% if produto.estoque>0 %}<form method="post" action="{{ url_for('store.adicionar_carrinho',produto_id=produto.id) }}"><button class="btn btn-primary btn-wide">ADICIONAR AO CARRINHO +</button></form>{% else %}<span class="stock-out">Produto esgotado</span>{% endif %}<a class="back-link" href="{{ url_for('store.catalogo') }}">← Voltar ao catálogo</a></div></div>
+{% endblock %}

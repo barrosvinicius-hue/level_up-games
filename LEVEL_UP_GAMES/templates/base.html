@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}LEVEL UP GAMES{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="{{ url_for('store.home') }}"><span class="brand-mark">LVL</span> LEVEL UP<span class="brand-accent">GAMES</span></a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+  <nav id="mainNav">
+    <a href="{{ url_for('store.home') }}">Início</a><a href="{{ url_for('store.catalogo') }}">Jogos e produtos</a>
+    {% if session.get('usuario') %}
+      <a href="{{ url_for('store.meus_pedidos') }}">Meus pedidos</a>
+      {% if session['usuario']['tipo']=='admin' %}<a href="{{ url_for('admin.dashboard') }}">Administração</a>{% endif %}
+      <span class="nav-user">Olá, {{ session['usuario']['nome'].split(' ')[0] }}</span><a href="{{ url_for('store.sair') }}">Sair</a>
+    {% else %}<a href="{{ url_for('store.login') }}">Entrar</a><a href="{{ url_for('store.cadastro') }}">Criar conta</a>{% endif %}
+    <a class="cart-link" href="{{ url_for('store.carrinho') }}">Carrinho <b>{{ cart_count }}</b></a>
+  </nav>
+</header>
+<main class="page">
+  {% with mensagens=get_flashed_messages(with_categories=true) %}{% if mensagens %}<div class="alerts">{% for tipo,msg in mensagens %}<div class="alert {{ tipo }}">{{ msg }}</div>{% endfor %}</div>{% endif %}{% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer><div class="footer-brand">LEVEL UP GAMES</div><p>Seu próximo nível começa aqui.</p><small>Projeto Integrado • DWS + POO + Banco de Dados</small></footer>
+<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+</body></html>

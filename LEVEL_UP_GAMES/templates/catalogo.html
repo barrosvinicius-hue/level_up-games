@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block title %}Catálogo | LEVEL UP GAMES{% endblock %}{% block content %}
+<section class="page-heading"><span class="eyebrow">DESCUBRA SEU PRÓXIMO JOGO</span><h1>Catálogo</h1><p>Jogos e acessórios selecionados para você.</p></section>
+<form class="filter-bar" method="get"><input name="q" value="{{ request.args.get('q','') }}" placeholder="Buscar jogo ou produto...">
+<select name="categoria"><option value="">Todas as categorias</option>{% for c in categorias %}<option value="{{ c.id }}" {% if request.args.get('categoria')==c.id|string %}selected{% endif %}>{{ c.nome }}</option>{% endfor %}</select>
+<select name="plataforma"><option value="">Todas as plataformas</option>{% for pl in plataformas %}<option value="{{ pl.plataforma }}" {% if request.args.get('plataforma')==pl.plataforma %}selected{% endif %}>{{ pl.plataforma }}</option>{% endfor %}</select><button class="btn btn-primary">Filtrar</button><a class="btn btn-ghost" href="{{ url_for('store.catalogo') }}">Limpar</a></form>
+<div class="product-grid catalog-grid">{% for p in produtos %}{% include "_product_card.html" %}{% else %}<div class="empty-state">Nenhum produto encontrado. Tente outros filtros.</div>{% endfor %}</div>
+{% endblock %}

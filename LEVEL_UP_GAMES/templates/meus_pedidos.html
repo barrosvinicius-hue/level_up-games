@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block title %}Meus pedidos | LEVEL UP GAMES{% endblock %}{% block content %}
+<section class="page-heading"><span class="eyebrow">SUA JORNADA</span><h1>Meus pedidos</h1></section>
+{% if pedidos %}<div class="table-wrap"><table><thead><tr><th>Pedido</th><th>Data</th><th>Total</th><th>Status</th></tr></thead><tbody>{% for p in pedidos %}<tr><td>#{{ p.id }}</td><td>{{ p.criado_em }}</td><td>R$ {{ '%.2f'|format(p.total)|replace('.',',') }}</td><td>{{ p.status }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state">Você ainda não realizou pedidos.</div>{% endif %}
+{% endblock %}

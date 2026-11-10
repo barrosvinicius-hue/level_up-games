@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block title %}Pedido confirmado | LEVEL UP GAMES{% endblock %}{% block content %}
+<div class="empty-state success-state"><div class="success-icon">✓</div><span class="eyebrow">PEDIDO REGISTRADO</span><h1>Compra confirmada!</h1><p>Seu pedido <b>#{{ pedido_id }}</b> foi salvo no sistema.</p><p>Pagamento: {{ metodo }} — simulação acadêmica.</p><h2>Total: R$ {{ '%.2f'|format(total)|replace('.',',') }}</h2><a class="btn btn-primary" href="{{ url_for('store.meus_pedidos') }}">Ver meus pedidos</a></div>
+{% endblock %}

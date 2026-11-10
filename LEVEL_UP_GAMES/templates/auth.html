@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}{{ 'Criar conta' if modo=='cadastro' else 'Entrar' }} | LEVEL UP GAMES{% endblock %}{% block content %}
+<div class="auth-wrap"><form class="auth-card" method="post"><span class="eyebrow">LEVEL UP GAMES</span><h1>{{ 'Crie sua conta' if modo=='cadastro' else 'Bem-vindo de volta' }}</h1><p>{{ 'Entre para fazer parte da comunidade.' if modo=='cadastro' else 'Acesse sua conta para continuar.' }}</p>
+{% if modo=='cadastro' %}<label>Nome completo<input name="nome" required maxlength="100" placeholder="Seu nome"></label>{% endif %}
+<label>E-mail<input type="email" name="email" required placeholder="voce@email.com"></label><label>Senha<input type="password" name="senha" required minlength="6" placeholder="Mínimo de 6 caracteres"></label><button class="btn btn-primary btn-wide">{{ 'CRIAR CONTA' if modo=='cadastro' else 'ENTRAR' }}</button>
+<p class="auth-switch">{% if modo=='cadastro' %}Já tem conta? <a href="{{ url_for('store.login') }}">Entrar</a>{% else %}Ainda não tem conta? <a href="{{ url_for('store.cadastro') }}">Cadastre-se</a>{% endif %}</p></form></div>
+{% endblock %}
